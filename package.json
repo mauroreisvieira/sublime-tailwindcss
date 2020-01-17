@@ -1,0 +1,35 @@
+{
+  "name": "sublime-tailwindcss",
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/maurovieirareis/sublime-tailwindcss.git",
+    "homepage": "https://github.com/maurovieirareis/sublime-tailwindcss"
+  },
+  "keywords": [
+    "tailwind",
+    "tailwindcss",
+    "sublime",
+    "autocomplete"
+  ],
+  "bugs": {
+    "url": "https://github.com/maurovieirareis/sublime-tailwindcss/issues"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Mauro Reis Vieira ",
+    "email": "mauroreisvieira@gmail.com",
+    "url": "http://mauroreisvieira.com/"
+  },
+  "ignore": [
+    "node_modules"
+  ],
+  "scripts": {
+    "build": "webpack"
+  },
+  "devDependencies": {
+    "tailwind-class-names": "1.0.0",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10"
+  }
+}
