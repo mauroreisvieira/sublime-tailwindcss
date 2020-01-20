@@ -28,6 +28,7 @@
     "build": "webpack"
   },
   "devDependencies": {
+    "prettier": "^1.19.1",
     "tailwind-class-names": "1.0.0",
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10"

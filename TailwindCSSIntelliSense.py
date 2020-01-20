@@ -5,11 +5,10 @@ import subprocess
 import json
 import re
 
-class TailwindCSSAutocomplete(sublime_plugin.EventListener):
+class TailwindCSSIntelliSense(sublime_plugin.EventListener):
     instances = {}
 
     def get_completions(self, view, folder):
-        self.instances[folder] = {}
 
         tw = self.find_file(
             folder,
@@ -21,7 +20,7 @@ class TailwindCSSAutocomplete(sublime_plugin.EventListener):
         if tw is not None and tw_plugin is not None:
             try:
                 script = 'var sublime={config:"' + tw + '",plugin:"' + tw_plugin + '"};'
-                script += sublime.load_resource('Packages/TailwindCSSAutocomplete/dist/bundle.js') + '\n'
+                script += sublime.load_resource('Packages/sublime-tailwindcss/dist/bundle.js') + '\n'
                 process = subprocess.Popen(
                     [view.settings().get('node_path', 'node')],
                     stdin = subprocess.PIPE,
@@ -32,6 +31,7 @@ class TailwindCSSAutocomplete(sublime_plugin.EventListener):
                 path = output.decode('utf-8').splitlines()[-1]
                 class_names = json.loads(path)
 
+                self.instances[folder] = {}
                 self.instances[folder]['config_file'] = tw
                 self.instances[folder]['separator'] = class_names.get('separator')
                 self.instances[folder]['class_names'] = class_names.get('classNames')
@@ -39,10 +39,11 @@ class TailwindCSSAutocomplete(sublime_plugin.EventListener):
                 self.instances[folder]['items'] = self.get_items_from_class_names(class_names.get('classNames'), class_names.get('screens'))
                 self.instances[folder]['config'] = class_names.get('config')
                 self.instances[folder]['config_items'] = self.get_config_items(class_names.get('config'))
-            except TimeoutExpired:
+            except subprocess.TimeoutExpired:
                 process.kill()
                 process.communicate()
             except:
+                print('TailwindCSSIntelliSense: ', sys.exc_info())
                 pass
 
     def get_items_from_class_names(self, class_names, screens, keys = []):
@@ -133,7 +134,7 @@ class TailwindCSSAutocomplete(sublime_plugin.EventListener):
             return []
 
         isCss = view.match_selector(locations[0], 'source.css meta.property-list.css')
-        isHtml = view.match_selector(locations[0], 'text.html string.quoted') or view.match_selector(locations[0], 'string.quoted.jsx')
+        isHtml = view.match_selector(locations[0], 'text.html string.quoted') or view.match_selector(locations[0], 'string.quoted.jsx') or view.match_selector(locations[0], 'meta.tag string.quoted')
 
         if isCss == False and isHtml == False:
             return []
