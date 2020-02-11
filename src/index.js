@@ -1,9 +1,9 @@
-const tailwindClassNames = require('tailwind-class-names').default
+const tailwindClassNames = require('tailwind-class-names').default;
 
-const configPath = sublime.config
-const config = __non_webpack_require__(configPath)
-const pluginPath = sublime.plugin
-const separator = (config.options && config.options.separator) || ':'
+const configPath = sublime.config;
+const config = __non_webpack_require__(configPath);
+const pluginPath = sublime.plugin;
+const separator = (config.options && config.options.separator) || ':';
 
 tailwindClassNames({
   config,
@@ -19,5 +19,5 @@ tailwindClassNames({
       screens: config.screens || {},
       config
     })
-  )
-})
+  );
+});

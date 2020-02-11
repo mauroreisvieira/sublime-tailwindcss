@@ -7,9 +7,9 @@
     "homepage": "https://github.com/maurovieirareis/sublime-tailwindcss"
   },
   "keywords": [
-    "tailwind",
     "tailwindcss",
     "sublime",
+    "intellisense",
     "autocomplete"
   ],
   "bugs": {
@@ -25,12 +25,18 @@
     "node_modules"
   ],
   "scripts": {
-    "build": "webpack"
+    "build": "webpack",
+    "build:css": "tailwind build src/tailwind.css -o dist/style.css",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
+    "postcss-loader": "^3.0.0",
     "prettier": "^1.19.1",
-    "tailwind-class-names": "1.0.0",
-    "webpack": "^4.41.5",
-    "webpack-cli": "^3.3.10"
+    "tailwind-class-names": "0.6.0",
+    "webpack": "^4.41.6",
+    "webpack-cli": "^4.0.0-beta.2"
+  },
+  "dependencies": {
+    "tailwindcss": "^1.2.0"
   }
 }
