@@ -21,7 +21,7 @@ class TailwindCSSIntelliSense(sublime_plugin.EventListener):
         if tw is not None and tw_plugin is not None:
             try:
                 script = 'var sublime={config:"' + tw + '",plugin:"' + tw_plugin + '"};'
-                script += sublime.load_resource('Packages/TailwindCSSIntelliSense/dist/bundle.js') + '\n'
+                script += sublime.load_resource('Packages/sublime-tailwindcss/dist/bundle.js') + '\n'
                 process = subprocess.Popen(
                     [view.settings().get('node_path', 'node')],
                     stdin = subprocess.PIPE,
